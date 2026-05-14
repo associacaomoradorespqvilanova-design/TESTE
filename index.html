@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Teste Gemini</title>
+</head>
+<body>
+
+<button onclick="listarModelos()">
+  Listar modelos Gemini
+</button>
+
+<pre id="saida"></pre>
+
+<script>
+
+async function listarModelos() {
+
+  const API_KEY =
+    'SUA_API_KEY';
+
+  try {
+
+    const resposta =
+      await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`
+      );
+
+    const dados =
+      await resposta.json();
+
+    console.log(dados);
+
+    document.getElementById(
+      'saida'
+    ).textContent =
+      JSON.stringify(
+        dados,
+        null,
+        2
+      );
+
+  } catch (err) {
+
+    console.error(err);
+
+    alert(err.message);
+  }
+}
+
+</script>
+
+</body>
+</html>
