@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Papelaria Encanto - Catálogo Personalizado</title>
+    <title>Gudyx Custom - Papelaria Personalizada</title>
     <style>
         :root {
-            --rosa: #e8b4b8;
-            --rosa-escuro: #c97d83;
-            --bege: #fdf6f0;
-            --marrom: #5c3d3e;
-            --dourado: #c49b5c;
-            --branco: #ffffff;
-            --sombra: 0 8px 32px rgba(0, 0, 0, 0.12);
-            --sombra-hover: 0 16px 40px rgba(0, 0, 0, 0.2);
+            /* Cores do Universo Gudyx */
+            --roxo-profundo: #0b041c;
+            --roxo-meio: #1a0a33;
+            --ciano-brilhante: #00f2fe;
+            --rosa-neon: #ff66b2;
+            --amarelo-neon: #ffe500;
+            --branco-espacial: #f0eaff;
+            --vidro-fundo: rgba(11, 4, 28, 0.65);
+            --vidro-borda: rgba(172, 40, 255, 0.3);
+            --sombra-neon: 0 0 25px rgba(172, 40, 255, 0.4);
+            --sombra-hover: 0 20px 60px rgba(0, 0, 0, 0.8);
             --transicao: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -24,14 +27,15 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
+            font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
             overflow-x: hidden;
             min-height: 100vh;
-            background: #2c1a1b;
+            background: var(--roxo-profundo);
+            color: var(--branco-espacial);
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ==================== BACKGROUND COM BLUR ==================== */
+        /* ==================== BACKGROUND CÓSMICO ==================== */
         .bg-container {
             position: fixed;
             top: -20px;
@@ -39,12 +43,11 @@
             width: calc(100% + 40px);
             height: calc(100% + 40px);
             z-index: -2;
-            background-image: url('https://images.unsplash.com/photo-1508615070457-7baeba4003ab?w=1920&q=80');
+            background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            /* ⬇️ BLUR DEFINIDO AQUI - Aumente ou diminua o valor em px conforme desejar ⬇️ */
-            filter: blur(10px);
+            filter: blur(5px);
             transform: scale(1.02);
         }
 
@@ -56,737 +59,206 @@
             height: 100%;
             z-index: -1;
             background: linear-gradient(135deg,
-                    rgba(44, 26, 27, 0.55) 0%,
-                    rgba(92, 61, 62, 0.45) 40%,
-                    rgba(44, 26, 27, 0.6) 100%);
+                    rgba(11, 4, 28, 0.6) 0%,
+                    rgba(26, 10, 51, 0.5) 50%,
+                    rgba(11, 4, 28, 0.7) 100%);
         }
 
         /* ==================== TELAS (SCREENS) ==================== */
-        .screen {
-            display: none;
-            min-height: 100vh;
-            width: 100%;
-            position: relative;
-            animation: fadeSlideIn 0.6s ease forwards;
-        }
-        .screen.active {
-            display: flex;
-        }
+        .screen { display: none; min-height: 100vh; width: 100%; position: relative; animation: fadeSlideIn 0.6s ease forwards; }
+        .screen.active { display: flex; }
 
         @keyframes fadeSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes floatMascot {
-            0%,
-            100% {
-                transform: translateY(0) rotate(-2deg);
-            }
-            25% {
-                transform: translateY(-18px) rotate(1deg);
-            }
-            50% {
-                transform: translateY(-8px) rotate(3deg);
-            }
-            75% {
-                transform: translateY(-22px) rotate(-1deg);
-            }
+        @keyframes floatMascote {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
         }
 
         @keyframes pulseGlow {
-            0%,
-            100% {
-                box-shadow: 0 0 20px rgba(201, 125, 131, 0.4), 0 0 60px rgba(201, 125, 131, 0.15);
-            }
-            50% {
-                box-shadow: 0 0 35px rgba(201, 125, 131, 0.7), 0 0 90px rgba(201, 125, 131, 0.3);
-            }
+            0%, 100% { box-shadow: 0 0 20px rgba(172, 40, 255, 0.4), 0 0 60px rgba(172, 40, 255, 0.15); }
+            50% { box-shadow: 0 0 40px rgba(172, 40, 255, 0.8), 0 0 100px rgba(0, 242, 254, 0.3); }
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
+
+        @keyframes comet {
+            0% { transform: translateX(-100px) translateY(-100px); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(1200px) translateY(300px); opacity: 0; }
         }
 
         @keyframes shimmer {
-            0% {
-                background-position: -200% center;
-            }
-            100% {
-                background-position: 200% center;
-            }
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
         }
 
-        /* ==================== HOME SCREEN ==================== */
-        .home-screen {
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            gap: 20px;
-        }
+        /* ==================== TELA HOME ==================== */
+        .home-screen { flex-direction: column; align-items: center; justify-content: center; padding: 20px; gap: 20px; }
 
-        /* Header */
-        .header-logo {
-            text-align: center;
-            z-index: 10;
-            margin-bottom: 5px;
-        }
-        .header-logo h1 {
-            font-family: 'Georgia', 'Playfair Display', 'Times New Roman', serif;
-            font-size: clamp(1.8rem, 4vw, 2.8rem);
-            color: #fdf6f0;
-            letter-spacing: 3px;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-            font-weight: 400;
-        }
-        .header-logo .subtitle {
-            font-size: 0.9rem;
-            color: #e8b4b8;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            margin-top: 2px;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
-        }
-        .header-logo .divider {
-            width: 80px;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #c49b5c, transparent);
-            margin: 8px auto 0;
-            border-radius: 50%;
-        }
+        .home-content { display: flex; align-items: center; justify-content: center; gap: 30px; width: 100%; max-width: 1300px; flex-wrap: wrap; z-index: 5; }
 
-        /* Conteúdo principal da home */
-        .home-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            width: 100%;
-            max-width: 1300px;
-            flex-wrap: wrap;
-            z-index: 5;
-        }
+        /* --- Colunas Laterais (Destaques e Promoções) --- */
+        .col-lateral { flex: 1 1 280px; max-width: 340px; min-width: 260px; display: flex; flex-direction: column; gap: 16px; }
+        .col-lateral .section-title { font-size: 1.1rem; letter-spacing: 3px; text-align: center; text-shadow: 0 0 15px var(--roxo-meio); color: var(--branco-espacial); margin-bottom: 2px; }
 
-        /* ==================== COLUNA ESQUERDA: DESTAQUES ==================== */
-        .destaques-col {
-            flex: 1 1 280px;
-            max-width: 340px;
-            min-width: 260px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        .destaques-col .section-title {
-            font-family: 'Georgia', serif;
-            color: #fdf6f0;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-align: center;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
-            margin-bottom: 2px;
-        }
-        .destaque-card {
-            background: rgba(255, 255, 255, 0.13);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 16px;
+        .cartao-gudyx {
+            background: var(--vidro-fundo);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--vidro-borda);
+            border-radius: 20px;
             padding: 16px 18px;
             cursor: pointer;
             transition: var(--transicao);
             display: flex;
             align-items: center;
             gap: 14px;
-            color: #fdf6f0;
+            box-shadow: var(--sombra-neon);
         }
-        .destaque-card:hover {
-            background: rgba(255, 255, 255, 0.22);
-            transform: translateX(6px);
-            border-color: rgba(255, 255, 255, 0.4);
-            box-shadow: var(--sombra-hover);
-        }
-        .destaque-card .card-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.6rem;
-            flex-shrink: 0;
-        }
-        .destaque-card .card-info h4 {
-            font-size: 0.95rem;
-            letter-spacing: 1px;
-            margin-bottom: 3px;
-        }
-        .destaque-card .card-info span {
-            font-size: 0.75rem;
-            opacity: 0.75;
-            letter-spacing: 0.5px;
-        }
-        .destaque-card .badge-acessos {
-            background: #c49b5c;
-            color: #2c1a1b;
-            font-size: 0.7rem;
-            padding: 3px 9px;
-            border-radius: 20px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
+        .cartao-gudyx:hover { background: rgba(172, 40, 255, 0.2); transform: translateX(6px); border-color: var(--ciano-brilhante); box-shadow: 0 0 40px rgba(0, 242, 254, 0.3); }
+        .cartao-gudyx .card-icon { width: 45px; height: 45px; border-radius: 12px; background: rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
+        .cartao-gudyx .card-info h4 { font-size: 0.95rem; letter-spacing: 1px; margin-bottom: 3px; }
+        .cartao-gudyx .card-info span { font-size: 0.75rem; opacity: 0.7; }
+        .cartao-gudyx .badge-neon { background: var(--rosa-neon); color: var(--roxo-profundo); font-size: 0.7rem; padding: 3px 10px; border-radius: 20px; font-weight: 700; white-space: nowrap; box-shadow: 0 0 15px rgba(255, 102, 178, 0.4); }
 
-        /* ==================== CENTRO: MASCOTE ==================== */
-        .mascote-container {
-            flex: 0 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            z-index: 8;
-            position: relative;
-        }
-        .mascote-wrapper {
-            position: relative;
-            animation: floatMascot 5s ease-in-out infinite;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        .mascote-wrapper:hover {
-            transform: scale(1.08);
-        }
-        .mascote-wrapper img {
-            width: clamp(150px, 25vw, 260px);
-            height: auto;
-            display: block;
-            filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.5));
-            transition: filter 0.4s ease;
-        }
-        .mascote-wrapper:hover img {
-            filter: drop-shadow(0 25px 50px rgba(201, 125, 131, 0.7));
-        }
-        /* Bolha decorativa atrás do mascote */
-        .mascote-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(232, 180, 184, 0.35) 0%, transparent 70%);
-            z-index: -1;
-            animation: pulseGlow 3s ease-in-out infinite;
-            pointer-events: none;
-        }
-        .mascote-label {
-            color: #fdf6f0;
-            font-family: 'Georgia', serif;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            margin-top: 8px;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
-            opacity: 0.8;
-            text-align: center;
-        }
+        /* --- Mascote Centro --- */
+        .mascote-container { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 8; position: relative; }
+        .mascote-wrapper { position: relative; animation: floatMascote 6s ease-in-out infinite; cursor: pointer; transition: transform 0.3s ease; }
+        .mascote-wrapper:hover { transform: scale(1.05); }
+        .mascote-wrapper img { width: clamp(180px, 28vw, 320px); height: auto; display: block; filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7)); transition: filter 0.4s ease; }
+        .mascote-wrapper:hover img { filter: drop-shadow(0 0 50px rgba(172, 40, 255, 0.8)) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7)); }
+        .mascote-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(172, 40, 255, 0.5) 0%, transparent 70%); z-index: -1; animation: pulseGlow 3s ease-in-out infinite; pointer-events: none; }
+        .mascote-label { font-size: 0.9rem; letter-spacing: 2px; margin-top: 10px; text-shadow: 0 0 20px rgba(172, 40, 255, 0.6); text-align: center; font-weight: 300; }
 
-        /* ==================== COLUNA DIREITA: SLIDE PROMOÇÕES ==================== */
-        .promocoes-col {
-            flex: 1 1 280px;
-            max-width: 340px;
-            min-width: 260px;
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-        .promocoes-col .section-title {
-            font-family: 'Georgia', serif;
-            color: #fdf6f0;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-align: center;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
-        }
-        .slider-container {
-            position: relative;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            overflow: hidden;
-            min-height: 280px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .slide {
-            display: none;
-            padding: 24px 20px;
-            text-align: center;
-            color: #fdf6f0;
-            width: 100%;
-            animation: fadeSlideIn 0.5s ease;
-        }
-        .slide.active-slide {
-            display: block;
-        }
-        .slide .promo-icon {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-        .slide h3 {
-            font-family: 'Georgia', serif;
-            font-size: 1.3rem;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-            color: #c49b5c;
-        }
-        .slide .preco-antigo {
-            text-decoration: line-through;
-            opacity: 0.6;
-            font-size: 0.9rem;
-        }
-        .slide .preco-novo {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #e8b4b8;
-            letter-spacing: 1px;
-        }
-        .slide .desconto-badge {
-            display: inline-block;
-            background: #c97d83;
-            color: #fff;
-            padding: 5px 14px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            margin-top: 8px;
-            letter-spacing: 1px;
-        }
-        .slider-dots {
-            display: flex;
-            gap: 8px;
-            justify-content: center;
-            margin-top: 4px;
-        }
-        .slider-dots .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.35);
-            cursor: pointer;
-            transition: var(--transicao);
-            border: none;
-        }
-        .slider-dots .dot.active-dot {
-            background: #c49b5c;
-            transform: scale(1.4);
-            box-shadow: 0 0 10px rgba(196, 155, 92, 0.6);
-        }
+        /* --- Slider de Promoções --- */
+        .slider-container { background: var(--vidro-fundo); backdrop-filter: blur(12px); border: 1px solid var(--vidro-borda); border-radius: 20px; overflow: hidden; min-height: 260px; display: flex; align-items: center; justify-content: center; }
+        .slide { display: none; padding: 24px 20px; text-align: center; width: 100%; animation: fadeSlideIn 0.5s ease; }
+        .slide.active-slide { display: block; }
+        .slide .promo-icon { font-size: 3rem; margin-bottom: 10px; }
+        .slide h3 { font-size: 1.2rem; letter-spacing: 1px; margin-bottom: 6px; color: var(--ciano-brilhante); text-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
+        .slide .preco-antigo { text-decoration: line-through; opacity: 0.5; font-size: 0.9rem; }
+        .slide .preco-novo { font-size: 1.8rem; font-weight: 700; color: var(--amarelo-neon); text-shadow: 0 0 15px rgba(255, 229, 0, 0.3); }
+        .slide .desconto-badge { display: inline-block; background: var(--ciano-brilhante); color: var(--roxo-profundo); padding: 5px 14px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; margin-top: 8px; }
+        .slider-dots { display: flex; gap: 8px; justify-content: center; margin-top: 4px; }
+        .slider-dots .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); cursor: pointer; transition: var(--transicao); border: none; }
+        .slider-dots .dot.active-dot { background: var(--rosa-neon); transform: scale(1.4); box-shadow: 0 0 15px rgba(255, 102, 178, 0.6); }
 
-        /* ==================== BOTÃO ACESSAR CATÁLOGO ==================== */
-        .btn-acessar-container {
-            z-index: 10;
-            margin-top: 5px;
-        }
-        .btn-acessar {
-            display: inline-block;
-            padding: 16px 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #2c1a1b;
-            background: linear-gradient(135deg, #e8b4b8 0%, #c49b5c 50%, #e8b4b8 100%);
-            background-size: 200% auto;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: var(--transicao);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-        }
-        .btn-acessar:hover {
-            background-position: right center;
-            transform: translateY(-3px);
-            box-shadow: 0 14px 40px rgba(196, 155, 92, 0.5);
-            animation: shimmer 1.5s ease infinite;
-        }
-        .btn-acessar:active {
-            transform: scale(0.96);
-            transition: transform 0.15s ease;
-        }
-        .btn-acessar .arrow {
-            display: inline-block;
-            margin-left: 8px;
-            transition: transform 0.3s ease;
-        }
-        .btn-acessar:hover .arrow {
-            transform: translateX(6px);
-        }
+        /* --- Botão Acessar Catálogo --- */
+        .btn-acessar-container { z-index: 10; margin-top: 5px; }
+        .btn-acessar { display: inline-block; padding: 16px 50px; font-size: 1.1rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, #a028ff 0%, var(--ciano-brilhante) 100%); border: none; border-radius: 50px; cursor: pointer; transition: var(--transicao); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); text-decoration: none; position: relative; overflow: hidden; }
+        .btn-acessar:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 40px rgba(172, 40, 255, 0.7); animation: shimmer 1.5s ease infinite; }
+        .btn-acessar:active { transform: scale(0.96); }
+        .btn-acessar .arrow { display: inline-block; margin-left: 8px; transition: transform 0.3s ease; }
+        .btn-acessar:hover .arrow { transform: translateX(6px); }
 
-        /* ==================== TELA DE ESCOLHA ==================== */
-        .escolha-screen {
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            padding: 30px;
-            background: rgba(0, 0, 0, 0.3);
-        }
-        .escolha-titulo {
-            font-family: 'Georgia', 'Playfair Display', serif;
-            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
-            color: #fdf6f0;
-            letter-spacing: 4px;
-            text-align: center;
-            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
-            animation: fadeSlideIn 0.7s ease forwards;
-        }
-        .escolha-opcoes {
-            display: flex;
-            gap: 30px;
-            flex-wrap: wrap;
-            justify-content: center;
-            animation: fadeSlideIn 0.7s ease 0.2s forwards;
-            opacity: 0;
-            animation-fill-mode: forwards;
-        }
-        .escolha-card {
-            flex: 1 1 250px;
-            max-width: 320px;
-            min-width: 220px;
-            min-height: 280px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 18px;
-            cursor: pointer;
-            transition: var(--transicao);
-            text-decoration: none;
-            color: #fdf6f0;
-            padding: 30px 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        .escolha-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        .escolha-card:hover::before {
-            opacity: 1;
-        }
-        .escolha-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(255, 255, 255, 0.5);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-        }
-        .escolha-card .escolha-icon {
-            font-size: 4rem;
-            position: relative;
-            z-index: 1;
-        }
-        .escolha-card h2 {
-            font-family: 'Georgia', serif;
-            font-size: 1.5rem;
-            letter-spacing: 3px;
-            position: relative;
-            z-index: 1;
-        }
-        .escolha-card p {
-            font-size: 0.85rem;
-            opacity: 0.7;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 1;
-            text-align: center;
-        }
-        .btn-voltar {
-            display: inline-block;
-            padding: 10px 28px;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
-            color: #fdf6f0;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 30px;
-            cursor: pointer;
-            transition: var(--transicao);
-            text-decoration: none;
-            position: relative;
-            z-index: 10;
-        }
-        .btn-voltar:hover {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: rgba(255, 255, 255, 0.5);
-        }
+        /* ==================== TELAS DE CATÁLOGO ==================== */
+        .listagem-screen { flex-direction: column; align-items: center; padding: 30px 20px; gap: 30px; overflow-y: auto; background: rgba(11, 4, 28, 0.4); }
+        .listagem-header { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 1100px; }
+        .listagem-header h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); letter-spacing: 3px; text-shadow: 0 0 30px rgba(172, 40, 255, 0.5); flex: 1; text-align: center; }
+        
+        .grid-catalogo { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; width: 100%; max-width: 1100px; }
+        .catalogo-card { background: var(--vidro-fundo); backdrop-filter: blur(12px); border: 1px solid var(--vidro-borda); border-radius: 20px; padding: 22px 18px; text-align: center; transition: var(--transicao); cursor: pointer; display: flex; flex-direction: column; gap: 10px; }
+        .catalogo-card:hover { background: rgba(172, 40, 255, 0.2); transform: translateY(-6px); box-shadow: var(--sombra-hover); border-color: var(--ciano-brilhante); }
+        .catalogo-card .card-emoji { font-size: 2.8rem; }
+        .catalogo-card h4 { letter-spacing: 1px; font-size: 1.05rem; }
+        .catalogo-card .preco { font-weight: 700; color: var(--amarelo-neon); font-size: 1.2rem; text-shadow: 0 0 10px rgba(255, 229, 0, 0.3); }
+        .catalogo-card .tag { display: inline-block; font-size: 0.7rem; background: var(--ciano-brilhante); color: var(--roxo-profundo); padding: 3px 10px; border-radius: 12px; letter-spacing: 1px; font-weight: 700; }
 
-        /* ==================== TELA DE LISTAGEM (SERVIÇOS/PRODUTOS) ==================== */
-        .listagem-screen {
-            flex-direction: column;
-            align-items: center;
-            padding: 30px 20px;
-            gap: 30px;
-            overflow-y: auto;
-        }
-        .listagem-header {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
-            max-width: 1100px;
-        }
-        .listagem-header h2 {
-            font-family: 'Georgia', serif;
-            font-size: clamp(1.5rem, 3vw, 2.2rem);
-            color: #fdf6f0;
-            letter-spacing: 3px;
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
-            flex: 1;
-            text-align: center;
-        }
-        .grid-catalogo {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 1100px;
-        }
-        .catalogo-card {
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 18px;
-            padding: 22px 18px;
-            text-align: center;
-            color: #fdf6f0;
-            transition: var(--transicao);
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .catalogo-card:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: translateY(-6px);
-            box-shadow: var(--sombra-hover);
-            border-color: rgba(255, 255, 255, 0.4);
-        }
-        .catalogo-card .card-emoji {
-            font-size: 2.8rem;
-        }
-        .catalogo-card h4 {
-            font-family: 'Georgia', serif;
-            letter-spacing: 1px;
-            font-size: 1.05rem;
-        }
-        .catalogo-card .preco {
-            font-weight: 700;
-            color: #c49b5c;
-            font-size: 1.2rem;
-        }
-        .catalogo-card .tag {
-            display: inline-block;
-            font-size: 0.7rem;
-            background: #c97d83;
-            color: #fff;
-            padding: 3px 10px;
-            border-radius: 12px;
-            letter-spacing: 1px;
-        }
+        /* ==================== BOTÕES DE VOLTAR ==================== */
+        .btn-voltar { padding: 10px 28px; font-size: 0.9rem; letter-spacing: 2px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 30px; cursor: pointer; transition: var(--transicao); color: #fff; text-decoration: none; }
+        .btn-voltar:hover { background: rgba(255, 255, 255, 0.2); border-color: var(--rosa-neon); box-shadow: 0 0 20px rgba(255, 102, 178, 0.2); }
+
+        /* ==================== COMETAS E ESTRELAS (CSS) ==================== */
+        .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden; }
+        .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 3s infinite alternate; }
+        .comet { position: absolute; width: 100px; height: 2px; background: linear-gradient(to right, rgba(255,255,255,0), rgba(0, 242, 254, 1), rgba(255,255,255,0.8)); border-radius: 50%; animation: comet 8s linear infinite; opacity: 0; box-shadow: 0 0 20px var(--ciano-brilhante); }
 
         /* ==================== RESPONSIVIDADE ==================== */
         @media (max-width: 900px) {
-            .home-content {
-                flex-direction: column;
-                gap: 20px;
-                align-items: center;
-            }
-            .destaques-col,
-            .promocoes-col {
-                max-width: 100%;
-                width: 100%;
-                flex: 1 1 auto;
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 10px;
-                justify-content: center;
-            }
-            .destaques-col .section-title,
-            .promocoes-col .section-title {
-                width: 100%;
-                text-align: center;
-            }
-            .destaque-card {
-                flex: 1 1 140px;
-                min-width: 140px;
-                flex-direction: column;
-                text-align: center;
-                gap: 8px;
-                padding: 14px 10px;
-            }
-            .slider-container {
-                min-height: 220px;
-                width: 100%;
-            }
-            .mascote-wrapper img {
-                width: clamp(120px, 35vw, 180px);
-            }
-            .mascote-glow {
-                width: 130px;
-                height: 130px;
-            }
-            .btn-acessar {
-                padding: 14px 36px;
-                font-size: 0.95rem;
-                letter-spacing: 2px;
-            }
-            .escolha-opcoes {
-                gap: 16px;
-            }
-            .escolha-card {
-                min-height: 200px;
-                padding: 20px 16px;
-            }
-            .grid-catalogo {
-                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-                gap: 12px;
-            }
+            .home-content { flex-direction: column; gap: 20px; }
+            .col-lateral { max-width: 100%; width: 100%; flex: 1 1 auto; flex-direction: row; flex-wrap: wrap; justify-content: center; }
+            .col-lateral .section-title { width: 100%; }
+            .cartao-gudyx { flex: 1 1 140px; flex-direction: column; text-align: center; gap: 8px; padding: 14px 10px; }
+            .slider-container { min-height: 200px; width: 100%; }
+            .mascote-wrapper img { width: clamp(120px, 35vw, 180px); }
+            .mascote-glow { width: 130px; height: 130px; }
+            .btn-acessar { padding: 14px 36px; font-size: 0.95rem; }
+            .grid-catalogo { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
         }
-
         @media (max-width: 480px) {
-            .header-logo h1 {
-                font-size: 1.4rem;
-                letter-spacing: 1px;
-            }
-            .header-logo .subtitle {
-                font-size: 0.7rem;
-                letter-spacing: 3px;
-            }
-            .destaque-card {
-                flex: 1 1 100%;
-                flex-direction: row;
-                text-align: left;
-                min-width: auto;
-            }
-            .mascote-wrapper img {
-                width: 110px;
-            }
-            .btn-acessar {
-                padding: 12px 28px;
-                font-size: 0.8rem;
-                letter-spacing: 1.5px;
-            }
-            .escolha-titulo {
-                font-size: 1.2rem;
-                letter-spacing: 2px;
-            }
-            .escolha-card {
-                min-height: 160px;
-                gap: 10px;
-            }
-            .escolha-card .escolha-icon {
-                font-size: 2.5rem;
-            }
-            .escolha-card h2 {
-                font-size: 1.1rem;
-            }
+            .mascote-wrapper img { width: 110px; }
+            .btn-acessar { padding: 12px 24px; font-size: 0.8rem; }
+            .cartao-gudyx { flex: 1 1 100%; flex-direction: row; text-align: left; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ==================== BACKGROUND FIXO COM BLUR ==================== -->
-    <!-- ⬇️ Troque a URL abaixo pela imagem de background da SUA escolha ⬇️ -->
-    <div class="bg-container" id="bgImage"></div>
+    <!-- ==================== FUNDO E PARTÍCULAS ==================== -->
+    <!-- ⬇️ SUBSTITUA A URL ABAIXO PELA IMAGEM DO SEU BACKGROUND (AQUELA DO PLANETA) ⬇️ -->
+    <div class="bg-container" id="bgImage" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80');"></div>
     <div class="bg-overlay"></div>
+
+    <!-- Estrelas e Cometas animados -->
+    <div class="stars" id="starsContainer">
+        <div class="comet"></div>
+        <div class="comet" style="width: 150px; animation-delay: -4s; top: 50%; left: -200px;"></div>
+    </div>
 
     <!-- ==================== TELA 1: HOME ==================== -->
     <div class="screen active" id="homeScreen">
         <div class="home-screen">
-            <!-- Logo / Nome -->
-            <div class="header-logo">
-                <h1>Papelaria Encanto</h1>
-                <p class="subtitle">Personalizados com Amor</p>
-                <div class="divider"></div>
-            </div>
-
-            <!-- Conteúdo: Destaques | Mascote | Promoções -->
             <div class="home-content">
-                <!-- Coluna Esquerda: Itens em Destaque / Mais Acessados -->
-                <div class="destaques-col">
-                    <p class="section-title">🌟 MAIS ACESSADOS</p>
-                    <div class="destaque-card" onclick="navegarPara('produtos')">
+                <!-- Coluna Esquerda: Destaques -->
+                <div class="col-lateral">
+                    <p class="section-title">🌌 MAIS VENDIDOS</p>
+                    <div class="cartao-gudyx" onclick="navegarPara('produtos')">
                         <div class="card-icon">📒</div>
-                        <div class="card-info">
-                            <h4>Caderno Personalizado</h4>
-                            <span>Capa dura • Nome gravado</span>
-                        </div>
-                        <span class="badge-acessos">🔥 TOP 1</span>
+                        <div class="card-info"><h4>Caderno Cósmico</h4><span>Capa dura em roxo neon</span></div>
+                        <span class="badge-neon">🔥 TOP 1</span>
                     </div>
-                    <div class="destaque-card" onclick="navegarPara('produtos')">
+                    <div class="cartao-gudyx" onclick="navegarPara('produtos')">
                         <div class="card-icon">📋</div>
-                        <div class="card-info">
-                            <h4>Agenda 2026</h4>
-                            <span>Design exclusivo • Capa soft</span>
-                        </div>
-                        <span class="badge-acessos">⭐ TOP 2</span>
+                        <div class="card-info"><h4>Agenda Galáctica</h4><span>Design exclusivo 2026</span></div>
+                        <span class="badge-neon">⭐ TOP 2</span>
                     </div>
-                    <div class="destaque-card" onclick="navegarPara('servicos')">
+                    <div class="cartao-gudyx" onclick="navegarPara('servicos')">
                         <div class="card-icon">💌</div>
-                        <div class="card-info">
-                            <h4>Convites Festa</h4>
-                            <span>Arte personalizada</span>
-                        </div>
-                        <span class="badge-acessos">🎯 TOP 3</span>
+                        <div class="card-info"><h4>Convite Sideral</h4><span>Personalizado com seu toque</span></div>
+                        <span class="badge-neon">🚀 NOVO</span>
                     </div>
                 </div>
 
-                <!-- Centro: Mascote Flutuante -->
+                <!-- Centro: Mascote Gudyx -->
                 <div class="mascote-container">
-                    <div class="mascote-wrapper" id="mascoteWrapper" title="Olá! Eu sou o Encantinho, o mascote da papelaria! 🦊">
+                    <div class="mascote-wrapper" id="mascoteWrapper" title="Clique em mim!">
                         <div class="mascote-glow"></div>
-                        <!-- ⬇️ SUBSTITUA O SRC ABAIXO PELO CAMINHO DO SEU PNG DO MASCOTE ⬇️ -->
+                        <!-- ⬇️ SUBSTITUA O SRC ABAIXO PELO CAMINHO DO SEU PNG DO MASCOTE (COM LOGO) ⬇️ -->
                         <img
-                        src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
-                        alt="Mascote da Papelaria"
-                        id="mascoteImg"
-                        onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🦊</text></svg>';"
+                            src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
+                            alt="Mascote Gudyx Custom"
+                            id="mascoteImg"
                         >
                     </div>
-                    <p class="mascote-label">✦ Encantinho ✦</p>
+                    <p class="mascote-label">✦ Criatividade • Organização • Sonhos ✦<br><span style="font-size: 0.8rem; opacity: 0.8;">Feito com alma taurina</span></p>
                 </div>
 
-                <!-- Coluna Direita: Slide de Promoções -->
-                <div class="promocoes-col">
-                    <p class="section-title">🎉 PROMOÇÕES</p>
+                <!-- Coluna Direita: Promoções -->
+                <div class="col-lateral">
+                    <p class="section-title">✨ PROMOÇÕES</p>
                     <div class="slider-container" id="sliderContainer">
                         <div class="slide active-slide" data-index="0">
                             <div class="promo-icon">📦</div>
-                            <h3>Kit Volta às Aulas</h3>
+                            <h3>Kit Gudyx Start</h3>
                             <p class="preco-antigo">R$ 149,90</p>
                             <p class="preco-novo">R$ 99,90</p>
                             <span class="desconto-badge">33% OFF</span>
@@ -807,349 +279,126 @@
                         </div>
                     </div>
                     <div class="slider-dots" id="sliderDots">
-                        <button class="dot active-dot" data-index="0" aria-label="Slide 1"></button>
-                        <button class="dot" data-index="1" aria-label="Slide 2"></button>
-                        <button class="dot" data-index="2" aria-label="Slide 3"></button>
+                        <button class="dot active-dot" data-index="0"></button>
+                        <button class="dot" data-index="1"></button>
+                        <button class="dot" data-index="2"></button>
                     </div>
                 </div>
             </div>
 
-            <!-- Botão ACESSAR CATÁLOGO -->
             <div class="btn-acessar-container">
-                <button class="btn-acessar" onclick="abrirCatalogo()" aria-label="Acessar Catálogo">
-                    ACESSAR CATÁLOGO <span class="arrow">→</span>
+                <button class="btn-acessar" onclick="abrirCatalogo()">
+                    Acessar Catálogo <span class="arrow">→</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- ==================== TELA 2: ESCOLHA (SERVIÇOS OU PRODUTOS) ==================== -->
+    <!-- ==================== TELAS DE ESCOLHA / PRODUTOS ==================== -->
     <div class="screen" id="escolhaScreen">
-        <div class="escolha-screen">
-            <h2 class="escolha-titulo">✨ ESCOLHA COMO PROSSEGUIR ✨</h2>
-            <div class="escolha-opcoes">
-                <!-- Card SERVIÇOS -->
-                <div class="escolha-card" onclick="navegarPara('servicos')">
-                    <span class="escolha-icon">🛠️</span>
-                    <h2>SERVIÇOS</h2>
-                    <p>Impressão • Encadernação • Arte Personalizada • Convites</p>
+        <div class="listagem-screen">
+            <h2 class="listagem-header" style="margin-top: 20px; color: #fff;">✨ O que você procura? ✨</h2>
+            <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
+                <div class="cartao-gudyx" style="flex: 1 1 250px; flex-direction: column; text-align: center; padding: 40px;" onclick="navegarPara('servicos')">
+                    <span style="font-size: 4rem;">🛠️</span>
+                    <h3>SERVIÇOS</h3>
+                    <p style="opacity: 0.7;">Impressão • Encadernação • Arte</p>
                 </div>
-                <!-- Card PRODUTOS -->
-                <div class="escolha-card" onclick="navegarPara('produtos')">
-                    <span class="escolha-icon">🛍️</span>
-                    <h2>PRODUTOS</h2>
-                    <p>Cadernos • Agendas • Blocos • Canecas • Adesivos</p>
+                <div class="cartao-gudyx" style="flex: 1 1 250px; flex-direction: column; text-align: center; padding: 40px;" onclick="navegarPara('produtos')">
+                    <span style="font-size: 4rem;">🛍️</span>
+                    <h3>PRODUTOS</h3>
+                    <p style="opacity: 0.7;">Cadernos • Agendas • Canecas</p>
                 </div>
             </div>
-            <button class="btn-voltar" onclick="voltarParaHome()">← Voltar ao Início</button>
+            <button class="btn-voltar" onclick="voltarParaHome()" style="margin-top: 20px;">← Voltar ao Início</button>
         </div>
     </div>
 
-    <!-- ==================== TELA 3: SERVIÇOS ==================== -->
     <div class="screen" id="servicosScreen">
         <div class="listagem-screen">
             <div class="listagem-header">
                 <button class="btn-voltar" onclick="voltarParaEscolha()">← Voltar</button>
-                <h2>🛠️ NOSSOS SERVIÇOS</h2>
+                <h2>🛠️ SERVIÇOS GUDYX</h2>
                 <button class="btn-voltar" onclick="voltarParaHome()">🏠 Início</button>
             </div>
             <div class="grid-catalogo">
-                <div class="catalogo-card">
-                    <span class="card-emoji">🖨️</span>
-                    <h4>Impressão Digital</h4>
-                    <p>Alta qualidade, cores vibrantes</p>
-                    <span class="preco">A partir de R$ 1,50</span>
-                </div>
-                <div class="catalogo-card">
-                    <span class="card-emoji">📚</span>
-                    <h4>Encadernação</h4>
-                    <p>Espiral, wire-o, capa dura</p>
-                    <span class="preco">A partir de R$ 15,00</span>
-                </div>
-                <div class="catalogo-card">
-                    <span class="card-emoji">🎨</span>
-                    <h4>Criação de Arte</h4>
-                    <p>Design exclusivo para você</p>
-                    <span class="preco">A partir de R$ 35,00</span>
-                </div>
-                <div class="catalogo-card">
-                    <span class="card-emoji">💌</span>
-                    <h4>Convites Personalizados</h4>
-                    <p>Festa, casamento, eventos</p>
-                    <span class="preco">A partir de R$ 4,90/un</span>
-                </div>
-                <div class="catalogo-card">
-                    <span class="card-emoji">📄</span>
-                    <h4>Papel Timbrado</h4>
-                    <p>Para sua empresa com estilo</p>
-                    <span class="preco">A partir de R$ 0,80/un</span>
-                </div>
-                <div class="catalogo-card">
-                    <span class="card-emoji">🏷️</span>
-                    <h4>Etiquetas & Tags</h4>
-                    <p>Para lembrancinhas e produtos</p>
-                    <span class="preco">A partir de R$ 2,50/un</span>
-                </div>
+                <div class="catalogo-card"><span class="card-emoji">🖨️</span><h4>Impressão Digital</h4><p>Alta definição</p><span class="preco">A partir de R$ 1,50</span></div>
+                <div class="catalogo-card"><span class="card-emoji">📚</span><h4>Encadernação</h4><p>Capa dura ou espiral</p><span class="preco">A partir de R$ 15,00</span></div>
+                <div class="catalogo-card"><span class="card-emoji">🎨</span><h4>Criação de Arte</h4><p>Design exclusivo</p><span class="preco">A partir de R$ 35,00</span></div>
+                <div class="catalogo-card"><span class="card-emoji">💌</span><h4>Convites</h4><p>Festa e eventos</p><span class="preco">A partir de R$ 4,90/un</span></div>
             </div>
         </div>
     </div>
 
-    <!-- ==================== TELA 4: PRODUTOS ==================== -->
     <div class="screen" id="produtosScreen">
         <div class="listagem-screen">
             <div class="listagem-header">
                 <button class="btn-voltar" onclick="voltarParaEscolha()">← Voltar</button>
-                <h2>🛍️ NOSSOS PRODUTOS</h2>
+                <h2>🛍️ PRODUTOS GUDYX</h2>
                 <button class="btn-voltar" onclick="voltarParaHome()">🏠 Início</button>
             </div>
             <div class="grid-catalogo">
-                <div class="catalogo-card">
-                    <span class="card-emoji">📒</span>
-                    <h4>Caderno Personalizado</h4>
-                    <p>Capa dura • Nome gravado</p>
-                    <span class="preco">R$ 49,90</span>
-                    <span class="tag">BESTSELLER</span>
-                </div>
-                <div class="catalogo-card">
-                    <span class="card-emoji">📋</span>
-                    <h4>Agenda 2026</h4>
-                    <p>Design exclusivo • Capa soft</p>
-                    <span class="preco">R$ 69,90</span>
-                </div>
-                <div class="catalogo-card">
-                    <span class="card-emoji">📝</span>
-                    <h4>Bloco de Notas</h4>
-                    <p>Bloco adesivo personalizado</p>
-                    <span class="preco">R$ 19,90</span>
-                </div>
-                <div class="catalogo-card">
-                    <span class="card-emoji">☕</span>
-                    <h4>Caneca com Foto</h4>
-                    <p>Sublimação de alta qualidade</p>
-                    <span class="preco">R$ 39,90</span>
-                </div>
-                <div class="catalogo-card">
-                    <span class="card-emoji">👕</span>
-                    <h4>Camiseta Estampada</h4>
-                    <p>Estampa personalizada DTF</p>
-                    <span class="preco">R$ 59,90</span>
-                </div>
-                <div class="catalogo-card">
-                    <span class="card-emoji">🌟</span>
-                    <h4>Adesivos Decorativos</h4>
-                    <p>Kit com 10 unidades</p>
-                    <span class="preco">R$ 14,90</span>
-                </div>
-                <div class="catalogo-card">
-                    <span class="card-emoji">🎁</span>
-                    <h4>Caixa Personalizada</h4>
-                    <p>Para presentes especiais</p>
-                    <span class="preco">R$ 24,90</span>
-                </div>
-                <div class="catalogo-card">
-                    <span class="card-emoji">🖼️</span>
-                    <h4>Quadro Decorativo</h4>
-                    <p>Com frase ou foto</p>
-                    <span class="preco">R$ 44,90</span>
-                </div>
+                <div class="catalogo-card"><span class="card-emoji">📒</span><h4>Caderno Cósmico</h4><p>Personalizado</p><span class="preco">R$ 49,90</span><span class="tag">BEST</span></div>
+                <div class="catalogo-card"><span class="card-emoji">📋</span><h4>Agenda 2026</h4><p>Design Gudyx</p><span class="preco">R$ 69,90</span></div>
+                <div class="catalogo-card"><span class="card-emoji">☕</span><h4>Caneca Gudyx</h4><p>Sublimação</p><span class="preco">R$ 39,90</span></div>
+                <div class="catalogo-card"><span class="card-emoji">🌟</span><h4>Adesivos</h4><p>Kit com 10</p><span class="preco">R$ 14,90</span></div>
             </div>
         </div>
     </div>
 
     <script>
-        // ==================== NAVEGAÇÃO ENTRE TELAS ====================
-        function mostrarTela(idTela) {
-            // Esconde todas as telas
-            document.querySelectorAll('.screen').forEach(tela => {
-                tela.classList.remove('active');
-            });
-            // Mostra a tela desejada
-            const tela = document.getElementById(idTela);
-            if (tela) {
-                tela.classList.add('active');
-                // Scroll para o topo
-                tela.scrollTop = 0;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-        }
+        function mostrarTela(id) { document.querySelectorAll('.screen').forEach(t => t.classList.remove('active')); document.getElementById(id).classList.add('active'); }
+        function abrirCatalogo() { mostrarTela('escolhaScreen'); }
+        function voltarParaHome() { mostrarTela('homeScreen'); resetarSlider(); }
+        function voltarParaEscolha() { mostrarTela('escolhaScreen'); }
+        function navegarPara(destino) { mostrarTela(destino === 'servicos' ? 'servicosScreen' : 'produtosScreen'); }
 
-        function abrirCatalogo() {
-            mostrarTela('escolhaScreen');
-        }
-
-        function voltarParaHome() {
-            mostrarTela('homeScreen');
-            resetarSlider();
-        }
-
-        function voltarParaEscolha() {
-            mostrarTela('escolhaScreen');
-        }
-
-        function navegarPara(destino) {
-            if (destino === 'servicos') {
-                mostrarTela('servicosScreen');
-            } else if (destino === 'produtos') {
-                mostrarTela('produtosScreen');
-            }
-        }
-
-        // ==================== SLIDER / CARROSSEL DE PROMOÇÕES ====================
-        let slideAtual = 0;
-        const totalSlides = 3;
-        let sliderIntervalo;
-
+        // ==================== SLIDER ====================
+        let slideAtual = 0; let sliderIntervalo;
         function mudarSlide(index) {
-            const slides = document.querySelectorAll('#sliderContainer .slide');
-            const dots = document.querySelectorAll('#sliderDots .dot');
-
-            slides.forEach(s => s.classList.remove('active-slide'));
-            dots.forEach(d => d.classList.remove('active-dot'));
-
+            document.querySelectorAll('#sliderContainer .slide').forEach((s, i) => s.classList.toggle('active-slide', i === index));
+            document.querySelectorAll('#sliderDots .dot').forEach((d, i) => d.classList.toggle('active-dot', i === index));
             slideAtual = index;
-            slides[slideAtual].classList.add('active-slide');
-            dots[slideAtual].classList.add('active-dot');
         }
-
-        function proximoSlide() {
-            const novoIndex = (slideAtual + 1) % totalSlides;
-            mudarSlide(novoIndex);
-        }
-
-        function iniciarSlider() {
-            sliderIntervalo = setInterval(proximoSlide, 4000);
-        }
-
-        function resetarSlider() {
-            clearInterval(sliderIntervalo);
-            mudarSlide(0);
-            iniciarSlider();
-        }
-
-        // Event listeners para os dots do slider
-        document.querySelectorAll('#sliderDots .dot').forEach(dot => {
-            dot.addEventListener('click', function() {
-                const index = parseInt(this.getAttribute('data-index'));
-                clearInterval(sliderIntervalo);
-                mudarSlide(index);
-                iniciarSlider();
-            });
-        });
-
-        // Pausar slider ao passar o mouse
-        const sliderContainer = document.getElementById('sliderContainer');
-        sliderContainer.addEventListener('mouseenter', () => {
-            clearInterval(sliderIntervalo);
-        });
-        sliderContainer.addEventListener('mouseleave', () => {
-            iniciarSlider();
-        });
-
-        // Iniciar slider automaticamente
+        function proximoSlide() { mudarSlide((slideAtual + 1) % 3); }
+        function iniciarSlider() { sliderIntervalo = setInterval(proximoSlide, 4000); }
+        function resetarSlider() { clearInterval(sliderIntervalo); mudarSlide(0); iniciarSlider(); }
+        document.querySelectorAll('#sliderDots .dot').forEach(dot => dot.addEventListener('click', function() { clearInterval(sliderIntervalo); mudarSlide(parseInt(this.getAttribute('data-index'))); iniciarSlider(); }));
+        document.getElementById('sliderContainer').addEventListener('mouseenter', () => clearInterval(sliderIntervalo));
+        document.getElementById('sliderContainer').addEventListener('mouseleave', () => iniciarSlider());
         iniciarSlider();
 
-        // ==================== EASTER EGG: Clique no mascote ====================
+        // ==================== INTERAÇÃO COM MASCOTE ====================
         const mascoteWrapper = document.getElementById('mascoteWrapper');
-        const mensagensMascote = [
-            'Oi! Eu sou o Encantinho! 🦊✨',
-            'Você vai amar nossos produtos! 💖',
-            'Dá uma olhada nas promoções! 🎉',
-            'Tudo feito com muito carinho! 🌸',
-            'Obrigado por visitar! Volte sempre! 🥰',
-        ];
-        let msgIndex = 0;
-
+        const msgs = ['Olá! Eu sou o Gudyx! ✨', 'Amor em cada detalhe! 💜', 'Escolha seu caderno cósmico! 🌌', 'Feito com alma taurina! ♉'];
+        let msgIdx = 0;
         mascoteWrapper.addEventListener('click', function() {
-            // Efeito de "pulinho"
-            this.style.animation = 'none';
-            this.offsetHeight; // trigger reflow
-            this.style.animation = 'floatMascot 0.6s ease-in-out';
-
-            // Mostrar mensagem flutuante
-            const msg = mensagensMascote[msgIndex % mensagensMascote.length];
-            msgIndex++;
-            mostrarToast(msg);
-
-            // Restaurar animação normal após o pulinho
-            setTimeout(() => {
-                this.style.animation = 'floatMascot 5s ease-in-out infinite';
-            }, 600);
-        });
-
-        // ==================== TOAST / MENSAGEM FLUTUANTE ====================
-        function mostrarToast(mensagem) {
-            // Remove toast existente
-            const toastExistente = document.querySelector('.toast-mascote');
-            if (toastExistente) toastExistente.remove();
-
+            this.style.animation = 'none'; this.offsetHeight; this.style.animation = 'floatMascote 0.6s ease-in-out';
             const toast = document.createElement('div');
-            toast.className = 'toast-mascote';
-            toast.textContent = mensagem;
-            toast.style.cssText = `
-                position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: rgba(92, 61, 62, 0.9);
-                color: #fdf6f0;
-                padding: 12px 24px;
-                border-radius: 30px;
-                font-size: 1rem;
-                letter-spacing: 1px;
-                z-index: 999;
-                pointer-events: none;
-                animation: toastInOut 2.5s ease forwards;
-                backdrop-filter: blur(8px);
-                border: 1px solid rgba(255,255,255,0.25);
-                box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-                text-align: center;
-            `;
+            toast.textContent = msgs[msgIdx % msgs.length]; msgIdx++;
+            toast.style.cssText = 'position:fixed;top:20px;left:50%;transform:translateX(-50%);background:rgba(11,4,28,0.9);color:#fff;padding:12px 24px;border-radius:30px;font-size:1rem;z-index:999;pointer-events:none;animation:toastInOut 2.5s ease forwards;backdrop-filter:blur(8px);border:1px solid rgba(172,40,255,0.6);box-shadow:0 0 30px rgba(172,40,255,0.5);';
             document.body.appendChild(toast);
-
-            // Remover após a animação
-            setTimeout(() => {
-                if (toast.parentNode) toast.remove();
-            }, 2600);
-        }
-
-        // Adicionar keyframe do toast dinamicamente
-        const toastStyle = document.createElement('style');
-        toastStyle.textContent = `
-            @keyframes toastInOut {
-                0% { opacity: 0; transform: translateX(-50%) translateY(-40px); }
-                15% { opacity: 1; transform: translateX(-50%) translateY(0); }
-                75% { opacity: 1; transform: translateX(-50%) translateY(0); }
-                100% { opacity: 0; transform: translateX(-50%) translateY(-30px); }
-            }
-        `;
-        document.head.appendChild(toastStyle);
-
-        // ==================== CONFIGURAÇÃO DO BACKGROUND ====================
-        // ⬇️ TROQUE A URL AQUI PELA IMAGEM DE FUNDO DA SUA ESCOLHA ⬇️
-        const URL_DA_SUA_IMAGEM = 'https://images.unsplash.com/photo-1508615070457-7baeba4003ab?w=1920&q=80';
-        document.getElementById('bgImage').style.backgroundImage = `url('${URL_DA_SUA_IMAGEM}')`;
-
-        // ⬇️ AJUSTE O NÍVEL DE BLUR AQUI (em pixels) ⬇️
-        const NIVEL_DO_BLUR = 10; // px — aumente para mais blur, diminua para menos
-        document.getElementById('bgImage').style.filter = `blur(${NIVEL_DO_BLUR}px)`;
-
-        // ==================== CONFIGURAÇÃO DO MASCOTE ====================
-        // ⬇️ TROQUE PELO CAMINHO DO SEU PNG DO MASCOTE ⬇️
-        const CAMINHO_DO_MASCOTE_PNG = 'https://cdn-icons-png.flaticon.com/512/616/616408.png';
-        document.getElementById('mascoteImg').src = CAMINHO_DO_MASCOTE_PNG;
-
-        // Fallback caso a imagem não carregue
-        document.getElementById('mascoteImg').addEventListener('error', function() {
-            this.src =
-                'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🦊</text></svg>';
+            setTimeout(() => { if (toast.parentNode) toast.remove(); }, 2600);
+            setTimeout(() => { this.style.animation = 'floatMascote 6s ease-in-out infinite'; }, 600);
         });
 
-        console.log('🦊✨ Papelaria Encanto - Catálogo pronto!');
-        console.log('📌 Dicas:');
-        console.log('  - Troque a imagem de fundo na variável URL_DA_SUA_IMAGEM');
-        console.log('  - Ajuste o blur na variável NIVEL_DO_BLUR (atual: ' + NIVEL_DO_BLUR + 'px)');
-        console.log('  - Troque o mascote na variável CAMINHO_DO_MASCOTE_PNG');
-        console.log('  - Clique no mascote para ver mensagens! 🥰');
+        // ==================== CONFIGURAÇÃO DO MASCOTE E BACKGROUND ====================
+        // ⬇️ SUBSTITUA O LINK ABAIXO PELO SEU MASCOTE (aquele com a poça e logo) ⬇️
+        const CAMINHO_DO_MASCOTE = 'https://imgur.com/Y5H9zqr';
+        document.getElementById('mascoteImg').src = CAMINHO_DO_MASCOTE;
+
+        // ⬇️ SUBSTITUA O LINK ABAIXO PELA IMAGEM DE FUNDO DO UNIVERSO GUDYX ⬇️
+        const URL_DO_BACKGROUND = 'https://imgur.com/UDwnKUg';
+        document.getElementById('bgImage').style.backgroundImage = `url('${URL_DO_BACKGROUND}')`;
     </script>
+
+    <style>
+        @keyframes toastInOut {
+            0% { opacity: 0; transform: translateX(-50%) translateY(-40px); }
+            15% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            75% { opacity: 1; transform: translateX(-50%) translateY(0); }
+            100% { opacity: 0; transform: translateX(-50%) translateY(-30px); }
+        }
+    </style>
 </body>
 </html>
