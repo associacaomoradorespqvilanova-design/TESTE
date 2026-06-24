@@ -3,28 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gudyx Custom - Papelaria Personalizada</title>
+    <title>Gudyx Custom - Papelaria dos Gluudyx</title>
     <style>
         :root {
-            /* Cores do Universo Gudyx */
             --roxo-profundo: #0b041c;
             --roxo-meio: #1a0a33;
             --ciano-brilhante: #00f2fe;
             --rosa-neon: #ff66b2;
             --amarelo-neon: #ffe500;
             --branco-espacial: #f0eaff;
-            --vidro-fundo: rgba(11, 4, 28, 0.65);
+            --vidro-fundo: rgba(11, 4, 28, 0.7);
             --vidro-borda: rgba(172, 40, 255, 0.3);
             --sombra-neon: 0 0 25px rgba(172, 40, 255, 0.4);
             --sombra-hover: 0 20px 60px rgba(0, 0, 0, 0.8);
             --transicao: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', 'Segoe UI', system-ui, sans-serif;
@@ -37,126 +32,72 @@
 
         /* ==================== BACKGROUND CÓSMICO ==================== */
         .bg-container {
-            position: fixed;
-            top: -20px;
-            left: -20px;
-            width: calc(100% + 40px);
-            height: calc(100% + 40px);
-            z-index: -2;
-            background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            filter: blur(5px);
-            transform: scale(1.02);
+            position: fixed; top: -20px; left: -20px; width: calc(100% + 40px); height: calc(100% + 40px);
+            z-index: -2; background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80');
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+            filter: blur(5px); transform: scale(1.02);
         }
-
         .bg-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: linear-gradient(135deg,
-                    rgba(11, 4, 28, 0.6) 0%,
-                    rgba(26, 10, 51, 0.5) 50%,
-                    rgba(11, 4, 28, 0.7) 100%);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: linear-gradient(135deg, rgba(11, 4, 28, 0.7) 0%, rgba(26, 10, 51, 0.5) 50%, rgba(11, 4, 28, 0.8) 100%);
         }
 
         /* ==================== TELAS (SCREENS) ==================== */
         .screen { display: none; min-height: 100vh; width: 100%; position: relative; animation: fadeSlideIn 0.6s ease forwards; }
         .screen.active { display: flex; }
+        @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes fadeSlideIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes floatMascote { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-20px) rotate(2deg); } }
+        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px rgba(172, 40, 255, 0.4); } 50% { box-shadow: 0 0 50px rgba(0, 242, 254, 0.5); } }
+        @keyframes twinkle { 0% { opacity: 0.3; } 50% { opacity: 1; } 100% { opacity: 0.3; } }
+        @keyframes comet { 0% { transform: translateX(-100px); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { transform: translateX(1200px); opacity: 0; } }
 
-        @keyframes floatMascote {
-            0%, 100% { transform: translateY(0) rotate(-2deg); }
-            50% { transform: translateY(-20px) rotate(2deg); }
-        }
-
-        @keyframes pulseGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(172, 40, 255, 0.4), 0 0 60px rgba(172, 40, 255, 0.15); }
-            50% { box-shadow: 0 0 40px rgba(172, 40, 255, 0.8), 0 0 100px rgba(0, 242, 254, 0.3); }
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
-        }
-
-        @keyframes comet {
-            0% { transform: translateX(-100px) translateY(-100px); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateX(1200px) translateY(300px); opacity: 0; }
-        }
-
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-
-        /* ==================== TELA HOME ==================== */
+        /* ==================== HOME SCREEN ==================== */
         .home-screen { flex-direction: column; align-items: center; justify-content: center; padding: 20px; gap: 20px; }
-
         .home-content { display: flex; align-items: center; justify-content: center; gap: 30px; width: 100%; max-width: 1300px; flex-wrap: wrap; z-index: 5; }
 
-        /* --- Colunas Laterais (Destaques e Promoções) --- */
-        .col-lateral { flex: 1 1 280px; max-width: 340px; min-width: 260px; display: flex; flex-direction: column; gap: 16px; }
-        .col-lateral .section-title { font-size: 1.1rem; letter-spacing: 3px; text-align: center; text-shadow: 0 0 15px var(--roxo-meio); color: var(--branco-espacial); margin-bottom: 2px; }
-
-        .cartao-gudyx {
-            background: var(--vidro-fundo);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--vidro-borda);
-            border-radius: 20px;
-            padding: 16px 18px;
-            cursor: pointer;
-            transition: var(--transicao);
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            box-shadow: var(--sombra-neon);
-        }
-        .cartao-gudyx:hover { background: rgba(172, 40, 255, 0.2); transform: translateX(6px); border-color: var(--ciano-brilhante); box-shadow: 0 0 40px rgba(0, 242, 254, 0.3); }
-        .cartao-gudyx .card-icon { width: 45px; height: 45px; border-radius: 12px; background: rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
-        .cartao-gudyx .card-info h4 { font-size: 0.95rem; letter-spacing: 1px; margin-bottom: 3px; }
-        .cartao-gudyx .card-info span { font-size: 0.75rem; opacity: 0.7; }
-        .cartao-gudyx .badge-neon { background: var(--rosa-neon); color: var(--roxo-profundo); font-size: 0.7rem; padding: 3px 10px; border-radius: 20px; font-weight: 700; white-space: nowrap; box-shadow: 0 0 15px rgba(255, 102, 178, 0.4); }
-
         /* --- Mascote Centro --- */
-        .mascote-container { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 8; position: relative; }
-        .mascote-wrapper { position: relative; animation: floatMascote 6s ease-in-out infinite; cursor: pointer; transition: transform 0.3s ease; }
+        .mascote-container { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 8; }
+        .mascote-wrapper { position: relative; animation: floatMascote 6s ease-in-out infinite; cursor: pointer; }
         .mascote-wrapper:hover { transform: scale(1.05); }
-        .mascote-wrapper img { width: clamp(180px, 28vw, 320px); height: auto; display: block; filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7)); transition: filter 0.4s ease; }
+        .mascote-wrapper img { width: clamp(180px, 28vw, 320px); height: auto; display: block; filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7)); transition: 0.4s; }
         .mascote-wrapper:hover img { filter: drop-shadow(0 0 50px rgba(172, 40, 255, 0.8)) drop-shadow(0 20px 40px rgba(0, 0, 0, 0.7)); }
         .mascote-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(172, 40, 255, 0.5) 0%, transparent 70%); z-index: -1; animation: pulseGlow 3s ease-in-out infinite; pointer-events: none; }
-        .mascote-label { font-size: 0.9rem; letter-spacing: 2px; margin-top: 10px; text-shadow: 0 0 20px rgba(172, 40, 255, 0.6); text-align: center; font-weight: 300; }
+        .mascote-label { font-size: 0.9rem; letter-spacing: 2px; margin-top: 10px; text-align: center; font-weight: 300; }
+        .mascote-label strong { color: var(--ciano-brilhante); text-shadow: 0 0 10px rgba(0, 242, 254, 0.4); }
 
-        /* --- Slider de Promoções --- */
-        .slider-container { background: var(--vidro-fundo); backdrop-filter: blur(12px); border: 1px solid var(--vidro-borda); border-radius: 20px; overflow: hidden; min-height: 260px; display: flex; align-items: center; justify-content: center; }
-        .slide { display: none; padding: 24px 20px; text-align: center; width: 100%; animation: fadeSlideIn 0.5s ease; }
-        .slide.active-slide { display: block; }
-        .slide .promo-icon { font-size: 3rem; margin-bottom: 10px; }
-        .slide h3 { font-size: 1.2rem; letter-spacing: 1px; margin-bottom: 6px; color: var(--ciano-brilhante); text-shadow: 0 0 15px rgba(0, 242, 254, 0.3); }
-        .slide .preco-antigo { text-decoration: line-through; opacity: 0.5; font-size: 0.9rem; }
-        .slide .preco-novo { font-size: 1.8rem; font-weight: 700; color: var(--amarelo-neon); text-shadow: 0 0 15px rgba(255, 229, 0, 0.3); }
-        .slide .desconto-badge { display: inline-block; background: var(--ciano-brilhante); color: var(--roxo-profundo); padding: 5px 14px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; margin-top: 8px; }
-        .slider-dots { display: flex; gap: 8px; justify-content: center; margin-top: 4px; }
-        .slider-dots .dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.3); cursor: pointer; transition: var(--transicao); border: none; }
-        .slider-dots .dot.active-dot { background: var(--rosa-neon); transform: scale(1.4); box-shadow: 0 0 15px rgba(255, 102, 178, 0.6); }
+        /* --- Seção OS GLUUDYX --- */
+        .gluudyx-section { width: 100%; max-width: 1100px; margin-top: 20px; text-align: center; z-index: 5; }
+        .gluudyx-section h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); letter-spacing: 3px; text-shadow: 0 0 30px rgba(172, 40, 255, 0.5); margin-bottom: 10px; }
+        .gluudyx-section p.mission { font-size: 0.95rem; opacity: 0.8; margin-bottom: 20px; max-width: 800px; margin-left: auto; margin-right: auto; }
+
+        .gluudyx-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        
+        .card-gluudyx {
+            background: var(--vidro-fundo);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--vidro-borda);
+            border-radius: 20px;
+            padding: 25px 20px;
+            flex: 1 1 200px;
+            max-width: 280px;
+            transition: var(--transicao);
+            cursor: default;
+        }
+        .card-gluudyx:hover { transform: translateY(-8px); border-color: var(--ciano-brilhante); box-shadow: 0 0 40px rgba(0, 242, 254, 0.2); }
+        .card-gluudyx .gluudyx-emoji { font-size: 3.5rem; display: block; margin-bottom: 10px; filter: drop-shadow(0 0 15px rgba(255,255,255,0.3)); }
+        .card-gluudyx h3 { letter-spacing: 1px; margin-bottom: 5px; }
+        .card-gluudyx .talent { font-size: 0.8rem; color: var(--amarelo-neon); font-weight: 600; letter-spacing: 1px; }
+        .card-gluudyx .desc { font-size: 0.8rem; opacity: 0.8; margin-top: 5px; }
+        
+        .card-gluudyx.gudyx { border-color: rgba(0, 242, 254, 0.3); }
+        .card-gluudyx.amarelo { border-color: rgba(255, 229, 0, 0.3); }
+        .card-gluudyx.rosa { border-color: rgba(255, 102, 178, 0.3); }
 
         /* --- Botão Acessar Catálogo --- */
-        .btn-acessar-container { z-index: 10; margin-top: 5px; }
-        .btn-acessar { display: inline-block; padding: 16px 50px; font-size: 1.1rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, #a028ff 0%, var(--ciano-brilhante) 100%); border: none; border-radius: 50px; cursor: pointer; transition: var(--transicao); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); text-decoration: none; position: relative; overflow: hidden; }
-        .btn-acessar:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 0 40px rgba(172, 40, 255, 0.7); animation: shimmer 1.5s ease infinite; }
-        .btn-acessar:active { transform: scale(0.96); }
+        .btn-acessar-container { z-index: 10; margin-top: 10px; }
+        .btn-acessar { display: inline-block; padding: 16px 50px; font-size: 1.1rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, #a028ff 0%, var(--ciano-brilhante) 100%); border: none; border-radius: 50px; cursor: pointer; transition: var(--transicao); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); }
+        .btn-acessar:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(172, 40, 255, 0.7); }
         .btn-acessar .arrow { display: inline-block; margin-left: 8px; transition: transform 0.3s ease; }
         .btn-acessar:hover .arrow { transform: translateX(6px); }
 
@@ -173,42 +114,33 @@
         .catalogo-card .preco { font-weight: 700; color: var(--amarelo-neon); font-size: 1.2rem; text-shadow: 0 0 10px rgba(255, 229, 0, 0.3); }
         .catalogo-card .tag { display: inline-block; font-size: 0.7rem; background: var(--ciano-brilhante); color: var(--roxo-profundo); padding: 3px 10px; border-radius: 12px; letter-spacing: 1px; font-weight: 700; }
 
-        /* ==================== BOTÕES DE VOLTAR ==================== */
-        .btn-voltar { padding: 10px 28px; font-size: 0.9rem; letter-spacing: 2px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 30px; cursor: pointer; transition: var(--transicao); color: #fff; text-decoration: none; }
-        .btn-voltar:hover { background: rgba(255, 255, 255, 0.2); border-color: var(--rosa-neon); box-shadow: 0 0 20px rgba(255, 102, 178, 0.2); }
+        .btn-voltar { padding: 10px 28px; font-size: 0.9rem; letter-spacing: 2px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 30px; cursor: pointer; transition: var(--transicao); color: #fff; }
+        .btn-voltar:hover { background: rgba(255, 255, 255, 0.2); border-color: var(--rosa-neon); }
 
-        /* ==================== COMETAS E ESTRELAS (CSS) ==================== */
+        /* ==================== COMETAS E ESTRELAS ==================== */
         .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden; }
         .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 3s infinite alternate; }
         .comet { position: absolute; width: 100px; height: 2px; background: linear-gradient(to right, rgba(255,255,255,0), rgba(0, 242, 254, 1), rgba(255,255,255,0.8)); border-radius: 50%; animation: comet 8s linear infinite; opacity: 0; box-shadow: 0 0 20px var(--ciano-brilhante); }
 
         /* ==================== RESPONSIVIDADE ==================== */
         @media (max-width: 900px) {
-            .home-content { flex-direction: column; gap: 20px; }
-            .col-lateral { max-width: 100%; width: 100%; flex: 1 1 auto; flex-direction: row; flex-wrap: wrap; justify-content: center; }
-            .col-lateral .section-title { width: 100%; }
-            .cartao-gudyx { flex: 1 1 140px; flex-direction: column; text-align: center; gap: 8px; padding: 14px 10px; }
-            .slider-container { min-height: 200px; width: 100%; }
+            .gluudyx-grid { flex-direction: column; align-items: center; }
+            .card-gluudyx { max-width: 100%; width: 100%; }
             .mascote-wrapper img { width: clamp(120px, 35vw, 180px); }
-            .mascote-glow { width: 130px; height: 130px; }
             .btn-acessar { padding: 14px 36px; font-size: 0.95rem; }
-            .grid-catalogo { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
         }
         @media (max-width: 480px) {
             .mascote-wrapper img { width: 110px; }
             .btn-acessar { padding: 12px 24px; font-size: 0.8rem; }
-            .cartao-gudyx { flex: 1 1 100%; flex-direction: row; text-align: left; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ==================== FUNDO E PARTÍCULAS ==================== -->
-    <!-- ⬇️ SUBSTITUA A URL ABAIXO PELA IMAGEM DO SEU BACKGROUND (AQUELA DO PLANETA) ⬇️ -->
+    <!-- ==================== FUNDO CÓSMICO ==================== -->
+    <!-- ⬇️ SUBSTITUA ABAIXO PELA SUA IMAGEM DE FUNDO (PLANETA E COMETAS) ⬇️ -->
     <div class="bg-container" id="bgImage" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80');"></div>
     <div class="bg-overlay"></div>
-
-    <!-- Estrelas e Cometas animados -->
     <div class="stars" id="starsContainer">
         <div class="comet"></div>
         <div class="comet" style="width: 150px; animation-delay: -4s; top: 50%; left: -200px;"></div>
@@ -217,78 +149,63 @@
     <!-- ==================== TELA 1: HOME ==================== -->
     <div class="screen active" id="homeScreen">
         <div class="home-screen">
+            
             <div class="home-content">
-                <!-- Coluna Esquerda: Destaques -->
-                <div class="col-lateral">
-                    <p class="section-title">🌌 MAIS VENDIDOS</p>
-                    <div class="cartao-gudyx" onclick="navegarPara('produtos')">
-                        <div class="card-icon">📒</div>
-                        <div class="card-info"><h4>Caderno Cósmico</h4><span>Capa dura em roxo neon</span></div>
-                        <span class="badge-neon">🔥 TOP 1</span>
-                    </div>
-                    <div class="cartao-gudyx" onclick="navegarPara('produtos')">
-                        <div class="card-icon">📋</div>
-                        <div class="card-info"><h4>Agenda Galáctica</h4><span>Design exclusivo 2026</span></div>
-                        <span class="badge-neon">⭐ TOP 2</span>
-                    </div>
-                    <div class="cartao-gudyx" onclick="navegarPara('servicos')">
-                        <div class="card-icon">💌</div>
-                        <div class="card-info"><h4>Convite Sideral</h4><span>Personalizado com seu toque</span></div>
-                        <span class="badge-neon">🚀 NOVO</span>
-                    </div>
-                </div>
-
-                <!-- Centro: Mascote Gudyx -->
+                <!-- Centro: Mascote Gudyx Original -->
                 <div class="mascote-container">
-                    <div class="mascote-wrapper" id="mascoteWrapper" title="Clique em mim!">
+                    <div class="mascote-wrapper" id="mascoteWrapper">
                         <div class="mascote-glow"></div>
-                        <!-- ⬇️ SUBSTITUA O SRC ABAIXO PELO CAMINHO DO SEU PNG DO MASCOTE (COM LOGO) ⬇️ -->
-                        <img
-                            src="https://cdn-icons-png.flaticon.com/512/616/616408.png"
-                            alt="Mascote Gudyx Custom"
-                            id="mascoteImg"
-                        >
+                        <!-- ⬇️ SUBSTITUA PELO PNG DO MASCOTE COM A LOGO "gudyx custom" ⬇️ -->
+                        <img src="https://cdn-icons-png.flaticon.com/512/616/616408.png" alt="Gudyx Original" id="mascoteImg">
                     </div>
-                    <p class="mascote-label">✦ Criatividade • Organização • Sonhos ✦<br><span style="font-size: 0.8rem; opacity: 0.8;">Feito com alma taurina</span></p>
+                    <p class="mascote-label">
+                        <strong>GUDYX ORIGINAL</strong><br>
+                        ✦ Criatividade • Organização • Sonhos ✦<br>
+                        <span style="font-size: 0.8rem; opacity: 0.8;">Feito com alma taurina</span>
+                    </p>
                 </div>
+            </div>
 
-                <!-- Coluna Direita: Promoções -->
-                <div class="col-lateral">
-                    <p class="section-title">✨ PROMOÇÕES</p>
-                    <div class="slider-container" id="sliderContainer">
-                        <div class="slide active-slide" data-index="0">
-                            <div class="promo-icon">📦</div>
-                            <h3>Kit Gudyx Start</h3>
-                            <p class="preco-antigo">R$ 149,90</p>
-                            <p class="preco-novo">R$ 99,90</p>
-                            <span class="desconto-badge">33% OFF</span>
-                        </div>
-                        <div class="slide" data-index="1">
-                            <div class="promo-icon">🎨</div>
-                            <h3>Combo Criativo</h3>
-                            <p class="preco-antigo">R$ 89,90</p>
-                            <p class="preco-novo">R$ 59,90</p>
-                            <span class="desconto-badge">33% OFF</span>
-                        </div>
-                        <div class="slide" data-index="2">
-                            <div class="promo-icon">💍</div>
-                            <h3>Convites Casamento</h3>
-                            <p class="preco-antigo">R$ 5,90/un</p>
-                            <p class="preco-novo">R$ 3,90/un</p>
-                            <span class="desconto-badge">34% OFF</span>
-                        </div>
+            <!-- ==================== SEÇÃO: CONHEÇA OS GLUUDYX ==================== -->
+            <div class="gluudyx-section">
+                <h2>🌌 CONHEÇA OS GLUUDYX</h2>
+                <p class="mission">
+                    "Criaturas fofas e gosmentas que vivem em um universo colorido e brilhante. 
+                    Eles nasceram do amor, da imaginação e dos sonhos da Gudyx. 
+                    A imaginação transforma qualquer momento em algo mágico."
+                </p>
+                
+                <div class="gluudyx-grid">
+                    <!-- Card 1: Gudyx Original -->
+                    <div class="card-gluudyx gudyx">
+                        <span class="gluudyx-emoji">🟣</span>
+                        <h3>Gudyx Original</h3>
+                        <span class="talent">✦ O Líder Cósmico</span>
+                        <p class="desc">O primeiro Gluudyx. Feito de gosma roxa encantada, sua missão é receber novos amigos e inspirar todas as coleções.</p>
                     </div>
-                    <div class="slider-dots" id="sliderDots">
-                        <button class="dot active-dot" data-index="0"></button>
-                        <button class="dot" data-index="1"></button>
-                        <button class="dot" data-index="2"></button>
+
+                    <!-- Card 2: Gluudyx Amarelo -->
+                    <div class="card-gluudyx amarelo">
+                        <span class="gluudyx-emoji">🟡</span>
+                        <h3>Lumyx</h3>
+                        <span class="talent">✦ Talento: Criatividade e Luz</span>
+                        <p class="desc">O ajudante dourado que ilumina as melhores ideias. Ele traz cor e alegria para os cadernos e projetos mais criativos.</p>
+                    </div>
+
+                    <!-- Card 3: Gluudyx Rosa -->
+                    <div class="card-gluudyx rosa">
+                        <span class="gluudyx-emoji">🩷</span>
+                        <h3>Pinkyx</h3>
+                        <span class="talent">✦ Talento: Amor e Carinho</span>
+                        <p class="desc">A ajudante rosa que espalha afeto. Ela está presente nos kits de presente e nos convites, tornando tudo mais especial.</p>
                     </div>
                 </div>
             </div>
 
+            <!-- Botão ACESSAR CATÁLOGO -->
             <div class="btn-acessar-container">
                 <button class="btn-acessar" onclick="abrirCatalogo()">
-                    Acessar Catálogo <span class="arrow">→</span>
+                    Ver Catálogo Gudyx <span class="arrow">→</span>
                 </button>
             </div>
         </div>
@@ -299,18 +216,18 @@
         <div class="listagem-screen">
             <h2 class="listagem-header" style="margin-top: 20px; color: #fff;">✨ O que você procura? ✨</h2>
             <div style="display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin-top: 20px;">
-                <div class="cartao-gudyx" style="flex: 1 1 250px; flex-direction: column; text-align: center; padding: 40px;" onclick="navegarPara('servicos')">
+                <div class="catalogo-card" style="flex: 1 1 250px; flex-direction: column; padding: 40px;" onclick="navegarPara('servicos')">
                     <span style="font-size: 4rem;">🛠️</span>
                     <h3>SERVIÇOS</h3>
                     <p style="opacity: 0.7;">Impressão • Encadernação • Arte</p>
                 </div>
-                <div class="cartao-gudyx" style="flex: 1 1 250px; flex-direction: column; text-align: center; padding: 40px;" onclick="navegarPara('produtos')">
+                <div class="catalogo-card" style="flex: 1 1 250px; flex-direction: column; padding: 40px;" onclick="navegarPara('produtos')">
                     <span style="font-size: 4rem;">🛍️</span>
                     <h3>PRODUTOS</h3>
                     <p style="opacity: 0.7;">Cadernos • Agendas • Canecas</p>
                 </div>
             </div>
-            <button class="btn-voltar" onclick="voltarParaHome()" style="margin-top: 20px;">← Voltar ao Início</button>
+            <button class="btn-voltar" onclick="voltarParaHome()" style="margin-top: 20px;">← Voltar ao Universo</button>
         </div>
     </div>
 
@@ -349,28 +266,13 @@
     <script>
         function mostrarTela(id) { document.querySelectorAll('.screen').forEach(t => t.classList.remove('active')); document.getElementById(id).classList.add('active'); }
         function abrirCatalogo() { mostrarTela('escolhaScreen'); }
-        function voltarParaHome() { mostrarTela('homeScreen'); resetarSlider(); }
+        function voltarParaHome() { mostrarTela('homeScreen'); }
         function voltarParaEscolha() { mostrarTela('escolhaScreen'); }
         function navegarPara(destino) { mostrarTela(destino === 'servicos' ? 'servicosScreen' : 'produtosScreen'); }
 
-        // ==================== SLIDER ====================
-        let slideAtual = 0; let sliderIntervalo;
-        function mudarSlide(index) {
-            document.querySelectorAll('#sliderContainer .slide').forEach((s, i) => s.classList.toggle('active-slide', i === index));
-            document.querySelectorAll('#sliderDots .dot').forEach((d, i) => d.classList.toggle('active-dot', i === index));
-            slideAtual = index;
-        }
-        function proximoSlide() { mudarSlide((slideAtual + 1) % 3); }
-        function iniciarSlider() { sliderIntervalo = setInterval(proximoSlide, 4000); }
-        function resetarSlider() { clearInterval(sliderIntervalo); mudarSlide(0); iniciarSlider(); }
-        document.querySelectorAll('#sliderDots .dot').forEach(dot => dot.addEventListener('click', function() { clearInterval(sliderIntervalo); mudarSlide(parseInt(this.getAttribute('data-index'))); iniciarSlider(); }));
-        document.getElementById('sliderContainer').addEventListener('mouseenter', () => clearInterval(sliderIntervalo));
-        document.getElementById('sliderContainer').addEventListener('mouseleave', () => iniciarSlider());
-        iniciarSlider();
-
         // ==================== INTERAÇÃO COM MASCOTE ====================
         const mascoteWrapper = document.getElementById('mascoteWrapper');
-        const msgs = ['Olá! Eu sou o Gudyx! ✨', 'Amor em cada detalhe! 💜', 'Escolha seu caderno cósmico! 🌌', 'Feito com alma taurina! ♉'];
+        const msgs = ['Olá, sou o Gudyx Original! ✨', 'Lumyx e Pinkyx estão aqui também! 💜', 'Todos os produtos têm alma taurina! ♉'];
         let msgIdx = 0;
         mascoteWrapper.addEventListener('click', function() {
             this.style.animation = 'none'; this.offsetHeight; this.style.animation = 'floatMascote 0.6s ease-in-out';
@@ -382,13 +284,13 @@
             setTimeout(() => { this.style.animation = 'floatMascote 6s ease-in-out infinite'; }, 600);
         });
 
-        // ==================== CONFIGURAÇÃO DO MASCOTE E BACKGROUND ====================
-        // ⬇️ SUBSTITUA O LINK ABAIXO PELO SEU MASCOTE (aquele com a poça e logo) ⬇️
-        const CAMINHO_DO_MASCOTE = 'https://i.imgur.com/Y5H9zqr.png';
+        // ==================== CONFIGURAÇÃO DAS IMAGENS ====================
+        // ⬇️ COLE O LINK DO SEU MASCOTE PNG AQUI ⬇️
+        const CAMINHO_DO_MASCOTE = 'https://cdn-icons-png.flaticon.com/512/616/616408.png';
         document.getElementById('mascoteImg').src = CAMINHO_DO_MASCOTE;
 
-        // ⬇️ SUBSTITUA O LINK ABAIXO PELA IMAGEM DE FUNDO DO UNIVERSO GUDYX ⬇️
-        const URL_DO_BACKGROUND = 'https://i.imgur.com/UDwnKUg.png';
+        // ⬇️ COLE O LINK DO SEU BACKGROUND (O PLANETA) AQUI ⬇️
+        const URL_DO_BACKGROUND = 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80';
         document.getElementById('bgImage').style.backgroundImage = `url('${URL_DO_BACKGROUND}')`;
     </script>
 
